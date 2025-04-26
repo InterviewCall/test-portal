@@ -1,0 +1,61 @@
+.wrapper {
+    position: relative;
+    width: 6rem;
+    height: 6rem;
+  }
+  
+  .svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(135deg);
+  }
+  
+  .bgCircle {
+    stroke: #e5e7eb;
+  }
+  
+  .progressCircle {
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .pass {
+    stroke: #22c55e;
+    color: #22c55e;
+  }
+  
+  .fail {
+    stroke: #fb2c36;
+    color: #fb2c36;
+  }
+  
+  .centerText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .scoreText {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .status {
+    display: block;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+  }
+  
+  .passBg {
+    background-color: #dcfce7;
+    color: #22c55e;
+  }
+  
+  .failBg {
+    background-color: #ffe2e2;
+    color: #fb2c36;
+  }
+  

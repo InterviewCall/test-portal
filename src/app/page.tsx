@@ -1,103 +1,213 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import axios, { AxiosResponse } from 'axios';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/navigation';
+import { ChangeEvent, FC, useContext, useState } from 'react';
+import toast from 'react-hot-toast';
+
+import Loader from '@/components/Loader';
+import QuestionSection from '@/components/QuestionSection';
+import { CANDIDATE_API } from '@/constants';
+import { CandidateContext } from '@/contexts/CandidateContext';
+import { TEST_STATUS } from '@/enums/TestStatus';
+import { CandidateResponse } from '@/types';
+
+const Select = dynamic(() => import('react-select'), { ssr: false });
+
+const options = Array.from({ length: 15 }, (_, i) => ({
+  value: i + 1,
+  label: (i + 1).toString(),
+}));
+
+
+type OptionType = {
+  value: number;
+  label: string;
+};
+
+const Login: FC = () => {
+  const { setCandidate } = useContext(CandidateContext);
+  const [selectExperience, setSelectExperience] = useState<OptionType | null>(null);
+  const [formData, setFormData] = useState({
+    email: '',
+    fullName: '',
+  });
+
+  const [inputOne, setInputOne] = useState(false);
+  const [inputTwo, setInputTwo] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    setFormData({...formData, [event.target.name]: event.target.value});
+  }
+
+  async function handleSubmit() {
+    if(!formData.email) {
+      toast.error('Please enter you email address');
+      return;
+    }
+
+    if(!formData.fullName) {
+      toast.error('Please enter you full name');
+      return;
+    }
+
+    if(!selectExperience) {
+      toast.error('Please select your work experience');
+      return;
+    }
+
+    if(!inputOne) {
+      toast.error('You have not checked yet!');
+      return;
+    }
+
+    if(!inputTwo) {
+      toast.error('You have not checked yet!');
+      return;
+    }
+    
+    try {
+      setIsLoading(true);
+      const response: AxiosResponse<CandidateResponse> = await axios.get(`${CANDIDATE_API}/get-test`, {
+        params: {
+          email: formData.email
+        }
+      });
+      const candidateInfo = response.data.data;
+      setCandidate(candidateInfo);
+      console.log(candidateInfo);
+
+      toast.success('Welcome Superstar!');
+
+      if((new Date(candidateInfo.dateOfTest) > new Date()) || (new Date(candidateInfo.startTime) > new Date())) {
+        router.replace('/not-started');
+        return;
+      }
+      if(candidateInfo.testStatus == TEST_STATUS.EXPIRED) {
+        router.push('/expired');
+      } else if(candidateInfo.testStatus == TEST_STATUS.INVITED || candidateInfo.testStatus == TEST_STATUS.IN_PROGRESS) {
+        router.push('/questions');
+      } else if(candidateInfo.testStatus == TEST_STATUS.SUBMITTED) {
+        router.replace('/feedback');
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className='w-screen h-screen bg-white flex md:flex-row flex-col font-poppins'>
+      {isLoading && <Loader />}
+      <div className='md:w-[40%] w-full flex flex-col text-black md:gap-y-10 md:justify-center md:px-20 px-6 py-5'>
+        <p className='md:text-xl text-base font-bold'>InterviewCall</p>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        <div className='flex flex-col gap-y-10'>
+          <p className='text-[#8a8c93] md:text-xl text-sm font-semibold'>Hey Superstar,</p>
+          <p className='md:text-4xl text-2xl font-bold text-left'>Welcome to InterviewCall&apos;s Entrance Test</p>
+
+          <div className='flex gap-x-8'>
+            <div className='flex flex-col'>
+              <p className='text-[#8a8c93]'>Test Duration</p>
+              <p className='text-black text-xl'>22 mins</p>
+            </div>
+
+            <div className='flex flex-col'>
+              <p className='text-[#8a8c93]'>No. of questions</p>
+              <p className='text-black text-xl'>22 questions</p>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+
+        {/* <div className='flex gap-x-4 text-[#3579b4] font-bold'>
+          <p className='underline decoration-dashed'>Platform Help</p>
+          <p>|</p>
+          <p className='underline decoration-dashed'>Execution Environment</p>
+          <p>|</p>
+          <p className='underline decoration-dashed'>FAQ</p>
+        </div> */}
+      </div>
+      <div className='md:w-[60%] w-full bg-[#f3f6f7] text-[#3d434b] flex flex-col md:py-12 py-6 md:px-14 px-5 gap-y-10 overflow-y-scroll'>
+        <p className='md:text-5xl text-3xl'>Sections</p>
+        <p>There are 11 sections that are part of this test.</p>
+        <QuestionSection />
+        <p className='md:text-5xl text-3xl'>Confirmation Form</p>
+        <p>Before we start, here is some extra information we need to asses you better.</p>
+
+        <div className='flex flex-col text-[#8a8c93] font-semibold gap-y-2'>
+          <p>Email address/Login<span className='text-red-500'>*</span></p>
+          <input 
+            type='text'
+            className='bg-white p-2 border-b-[1px] rounded-md focus:outline-none md:w-[70%] w-full placeholder:font-light shadow-[0_3px_10px_rgb(0,0,0,0.2)]'
+            placeholder='Enter Email'
+            name='email'
+            value={formData.email}
+            onChange={handleChange}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+        </div>
+
+        <div className='flex flex-col text-[#8a8c93] font-semibold gap-y-2'>
+          <p>Full Name<span className='text-red-500'>*</span></p>
+          <input 
+            type='text'
+            className='bg-white p-2 border-b-[1px] rounded-md focus:outline-none md:w-[70%] w-full placeholder:font-light shadow-[0_3px_10px_rgb(0,0,0,0.2)]'
+            placeholder='Enter Full Name'
+            name='fullName'
+            value={formData.fullName}
+            onChange={handleChange}
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+        </div>
+
+        <div className='flex flex-col text-[#8a8c93] font-semibold gap-y-2'>
+          <p>Work Experience (in years)<span className='text-red-500'>*</span></p>
+          <Select
+            options={options}
+            value={selectExperience}
+            placeholder='Select'
+            className='text-[#8a8c93] cursor-pointer placeholder:font-light md:w-[30%] w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)]'
+            isSearchable
+            onChange={(selectedOption) => {
+              const selected = selectedOption as OptionType;
+              setSelectExperience(selected);
+              sessionStorage.setItem('workExperience', JSON.stringify(selected));
+            }}
+            styles={{
+              control: (provided) => ({
+                ...provided,
+                padding: '0.15rem',
+                borderRadius: '0.375rem',
+                cursor: 'pointer',
+              }),
+              placeholder: (provided) => ({
+                ...provided,
+                fontWeight: 100,
+                color: '#8a8c93',
+              }),
+            }}
           />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        </div>
+
+        <div className='flex flex-col w-full gap-y-10'>
+          <p>Declaration Statement<span className='text-red-500'>*</span></p>
+          <div className='flex gap-x-5 md:w-[80%] w-full'>
+            <input type='checkbox' onChange={(e) => setInputOne(e.target.checked)} className='checkbox checkbox-lg bg-white text-black checked:bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]' />
+            <p className='text-[#8a8c93] font-semibold'>I agree not to copy code from any source, including colleagues, and will refrain from accessing websites or AI tools for assistances. I further agree not to copy or share any content or questions from this assesment with any other medium or forum.</p>
+          </div>
+
+          <div className='flex gap-x-5 md:w-[80%] w-full'>
+            <input type='checkbox' onChange={(e) => setInputTwo(e.target.checked)} className='checkbox checkbox-lg bg-white text-black checked:bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]' />
+            <p className='text-[#8a8c93] font-semibold'>I agree to InterviewCall&apos;s <span className='text-[#3579b4] underline'>Terms of Service</span> and <span className='text-[#3579b4] underline'>Privacy Policy</span></p>
+          </div>
+        </div>
+
+        <button onClick={handleSubmit} className='w-fit bg-[#098931] hover:bg-green-800 duration-200 text-white px-4 py-3 cursor-pointer rounded-lg font-semibold shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>Agree and Start</button>
+
+      </div>
     </div>
   );
-}
+};
+
+export default Login;

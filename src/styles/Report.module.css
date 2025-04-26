@@ -1,0 +1,89 @@
+.header {
+    width: 100vw;
+    background-color: #191e25;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    color: white;
+}
+  
+  .headerLeft {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  
+  .headerTitle {
+    font-weight: 600;
+    font-size: 1.125rem;
+  }
+  
+  .headerName {
+    font-weight: 600;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+  }
+  
+  .container {
+    width: 95%;
+    margin: 0 auto;
+    padding-top: 48px;
+  }
+  
+  .topRow {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .candidateName {
+    color: #000000;
+    font-size: 2.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  .sectionStack {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    margin-top: 28px;
+  }
+  
+  .card {
+    width: 100%;
+    border: 1.5px solid #e5e7eb;
+    padding: 32px;
+    color: #000000;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .cardTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .scoreRow {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .scorePercentage,
+  .scoreBreakdown {
+    font-size: 1.125rem;
+  }
+  
+  .dot {
+    font-size: 1.25rem;
+  }
+  
+  .scoreInfo {
+    color: #a1a1a1;
+    font-size: 1.125rem;
+  }
+  
