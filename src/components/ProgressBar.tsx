@@ -11,34 +11,34 @@
 //   const progressDash = `${(score * 75) / 100} 100`; // proportional to background
 
 //   return (
-//     <div className="relative size-24">
-//       <svg className='size-full rotate-[135deg]' viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+//     <div className='relative size-24'>
+//       <svg className='size-full rotate-[135deg]' viewBox='0 0 36 36' xmlns='http://www.w3.org/2000/svg'>
 //         {/* Background Circle */}
 //         <circle
-//           cx="18"
-//           cy="18"
-//           r="16"
-//           fill="none"
-//           className="stroke-current text-[#e5e7eb]"
+//           cx='18'
+//           cy='18'
+//           r='16'
+//           fill='none'
+//           className='stroke-current text-[#e5e7eb]'
 //           strokeWidth={3}
 //           strokeDasharray={backgroundDash}
-//           strokeLinecap="round"
+//           strokeLinecap='round'
 //         />
 //         {/* Progress Circle */}
 //         <circle
-//           cx="18"
-//           cy="18"
-//           r="16"
-//           fill="none"
+//           cx='18'
+//           cy='18'
+//           r='16'
+//           fill='none'
 //           className={clsx('stroke-current', score >= 50 ? 'text-[#22c55e]' : 'text-[#fb2c36]')}
 //           strokeWidth={3}
 //           strokeDasharray={progressDash}
-//           strokeLinecap="round"
+//           strokeLinecap='round'
 //         />
 //       </svg>
 
 //       {/* Center Text */}
-//       <div className="absolute top-1/2 start-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+//       <div className='absolute top-1/2 start-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center'>
 //         <span className={clsx('text-xl font-bold', score >= 50 ? 'text-[#22c55e]' : 'text-[#fb2c36]')}>
 //           {score}%
 //         </span>
@@ -69,29 +69,29 @@ const ProgressBar: React.FC<GaugeProps> = ({ score }) => {
     <div className={styles.wrapper}>
       <svg
         className={styles.svg}
-        viewBox="0 0 36 36"
-        xmlns="http://www.w3.org/2000/svg"
+        viewBox='0 0 36 36'
+        xmlns='http://www.w3.org/2000/svg'
         aria-label={`Score: ${score} percent. ${isPass ? 'Pass' : 'Fail'}`}
       >
         <circle
-          cx="18"
-          cy="18"
-          r="16"
-          fill="none"
+          cx='18'
+          cy='18'
+          r='16'
+          fill='none'
           className={styles.bgCircle}
           strokeWidth={3}
           strokeDasharray={backgroundDash}
-          strokeLinecap="round"
+          strokeLinecap='round'
         />
         <circle
-          cx="18"
-          cy="18"
-          r="16"
-          fill="none"
+          cx='18'
+          cy='18'
+          r='16'
+          fill='none'
           className={clsx(styles.progressCircle, isPass ? styles.pass : styles.fail)}
           strokeWidth={3}
           strokeDasharray={progressDash}
-          strokeLinecap="round"
+          strokeLinecap='round'
         />
       </svg>
 
@@ -142,24 +142,24 @@ export default ProgressBar;
 
 //   return (
 //     <View style={{ position: 'relative', width: 120, height: 120 }}>
-//       <Svg width="120" height="120" viewBox="0 0 36 36" style={{ transform: 'rotate(135deg)' }}>
+//       <Svg width='120' height='120' viewBox='0 0 36 36' style={{ transform: 'rotate(135deg)' }}>
 //         {/* Background Circle */}
 //         <Path
-//           d="M18 2a16 16 0 1 0 0 32 16 16 0 0 0 0-32"
-//           fill="none"
-//           stroke="#e5e7eb"
+//           d='M18 2a16 16 0 1 0 0 32 16 16 0 0 0 0-32'
+//           fill='none'
+//           stroke='#e5e7eb'
 //           strokeWidth={3}
 //           strokeDasharray={backgroundDash}
-//           strokeLinecap="round"
+//           strokeLinecap='round'
 //         />
 //         {/* Progress Circle */}
 //         <Path
-//           d="M18 2a16 16 0 1 0 0 32 16 16 0 0 0 0-32"
-//           fill="none"
+//           d='M18 2a16 16 0 1 0 0 32 16 16 0 0 0 0-32'
+//           fill='none'
 //           stroke={strokeColor}
 //           strokeWidth={3}
 //           strokeDasharray={progressDash}
-//           strokeLinecap="round"
+//           strokeLinecap='round'
 //         />
 //       </Svg>
 

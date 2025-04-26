@@ -13,7 +13,7 @@ import useQuestion from '@/hooks/useQuestion';
 import { ErrorResponse } from '@/types';
 
 const Question: FC = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const { candidateDetails } = useContext(CandidateContext);
   const { question, isLoading, isError, error } = useQuestion(id as string);
 

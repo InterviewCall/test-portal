@@ -37,18 +37,18 @@ const TestNotStarted: FC = () => {
 
   const formattedStartTime = `${formatOnlyDate(candidateDetails.dateOfTest)}, ${formatTime(candidateDetails.startTime)}`;
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-base-100 text-center px-4">
-      <h1 className="text-2xl md:text-3xl font-semibold mb-4 text-error">
+    <div className='min-h-screen flex flex-col items-center justify-center bg-base-100 text-center px-4'>
+      <h1 className='text-2xl md:text-3xl font-semibold mb-4 text-error'>
         Test Has Not Started Yet
       </h1>
-      <p className="text-lg md:text-xl mb-6">
+      <p className='text-lg md:text-xl mb-6'>
         Your scheduled test start time is:
         <br />
-        <span className="font-bold text-primary">{formattedStartTime}</span>
+        <span className='font-bold text-primary'>{formattedStartTime}</span>
       </p>
       <button
         onClick={handleGoBack}
-        className="px-6 py-2 rounded-md bg-primary text-white font-medium hover:bg-indigo-600 duration-300 transition cursor-pointer"
+        className='px-6 py-2 rounded-md bg-primary text-white font-medium hover:bg-indigo-600 duration-300 transition cursor-pointer'
       >
         Go Back
       </button>

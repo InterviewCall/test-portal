@@ -23,13 +23,13 @@ const CandidateDetails: React.FC<CandidateDetailsProps> = ({
 }) => {
   return (
     <div className={styles.container}>
-      <Row label="Email" value={email} />
-      <Row label="Test" value={testName} />
-      <Row label="Taken on" value={takenOn} />
-      <Row label="Time taken" value={timeTaken} />
-      <Row label="Work Experience" value={workExperience} />
-      <Row label="Invited by" value={invitedBy} />
-      <Row label="Invited on" value={invitedOn} />
+      <Row label='Email' value={email} />
+      <Row label='Test' value={testName} />
+      <Row label='Taken on' value={takenOn} />
+      <Row label='Time taken' value={timeTaken} />
+      <Row label='Work Experience' value={workExperience} />
+      <Row label='Invited by' value={invitedBy} />
+      <Row label='Invited on' value={invitedOn} />
     </div>
   );
 };
