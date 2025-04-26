@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { PROBLEM_API } from '@/constants';
+import { CANDIDATE_API, PROBLEM_API } from '@/constants';
+import { TEST_STATUS } from '@/enums/TestStatus';
 import { AnswerMap, Candidate, CandidateResponse, FinalScoreReportResponse } from '@/types';
 
 import { formatDate, formatDuration, formatOnlyDate } from '.';
@@ -18,6 +19,13 @@ async function calculateTotalScore(candidateDetails: Candidate, answers: AnswerM
     const workExperience = JSON.parse(storedExp).label;
     const invitedBy = candidateDetails?.invitedBy;
     try {
+      //mark-submit
+      await axios.patch(`${CANDIDATE_API}/update-test-status`, {
+        email: candidateEmail,
+        status: TEST_STATUS.SUBMITTED
+      });
+
+      // calculate score
       const response: AxiosResponse<FinalScoreReportResponse> = await axios.post(`${PROBLEM_API}/calculate-score`, {
         userAnswers: answers,
       });
@@ -25,6 +33,7 @@ async function calculateTotalScore(candidateDetails: Candidate, answers: AnswerM
       const candidateResult = response.data.data;
       const { percentage, totalMarks, obtainedMarks, sections } = candidateResult;
 
+      // update candidate with percenatge and report card by generating pdf
       const candidateResponse: AxiosResponse<CandidateResponse> = await axios.post('/api/submit-test', {
         candidateResult: {
           candidateName,
