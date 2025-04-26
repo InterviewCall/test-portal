@@ -21,7 +21,7 @@ const TestNavBar: FC = () => {
   const [diff, setDiff] = useState(0);
   const intervalId = useRef<NodeJS.Timeout | null>(null);
   const { answers } = useContext(AnswerContext);
-  const { candidateDetails, setCandidate, setLoader, submitLoader } = useContext(CandidateContext);
+  const { candidateDetails, setCandidate, setLoader } = useContext(CandidateContext);
   const router = useRouter();
 
   async function calculateScore() {
@@ -106,7 +106,7 @@ const TestNavBar: FC = () => {
       if(newDiff <= 0) {
         clearInterval(intervalId.current!);
         setDiff(0);
-        if(submitLoader != 'hidden') calculateScore();
+        if(candidateDetails.testStatus != TEST_STATUS.SUBMITTED) calculateScore();
       } else {
         setDiff(newDiff);
       }
