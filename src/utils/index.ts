@@ -1,12 +1,34 @@
-import { format } from 'date-fns';
-
 import { CandidateResult } from '@/types';
 
-export const formatDate = (date: Date) => format(date, 'dd MMMM, yyyy hh:mm a');
+export const formatDate = (date: Date) => {
+    return new Intl.DateTimeFormat('en-GB', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+      timeZone: 'Asia/Kolkata',
+    }).format(new Date(date));
+  };
 
-export const formatOnlyDate = (date: Date) => format(date, 'dd MMMM, yyyy');
+export const formatOnlyDate = (date: Date) => {
+    return new Intl.DateTimeFormat('en-GB', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+      timeZone: 'Asia/Kolkata',
+    }).format(new Date(date));
+  };
   
-export const formatTime = (time: Date) => format(time, 'h:mm aa');
+export const formatTime = (time: Date) => {
+    return Intl.DateTimeFormat('en-GB', {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+      timeZone: 'Asia/Kolkata',
+    }).format(new Date(time));
+  };
 
 export const formatDuration = (durationInMs: number) => {
     const minutes = Math.floor(durationInMs / 60000);
