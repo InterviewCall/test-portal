@@ -1,5 +1,5 @@
 import { PutObjectCommand } from '@aws-sdk/client-s3';
-import chromium from '@sparticuz/chromium-min';
+import chromium from '@sparticuz/chromium';
 import axios, { AxiosResponse } from 'axios';
 import puppeteer from 'puppeteer-core';
 
@@ -8,13 +8,13 @@ import { CANDIDATE_API } from '@/constants';
 import { CandidateResponse, CandidateResult } from '@/types';
 import { pdfContent } from '@/utils';
 
+// const isLocal = !!process.env.EXECUTABLE_PATH;
 async function submitService(candidateResult: CandidateResult) {
     try {
         const { candidateEmail, percentage } = candidateResult;
 
         const isProduction = process.env.VERCEL_ENV === 'production';
 
-        // const isLocal = !!process.env.EXECUTABLE_PATH;
         const browser = await puppeteer.launch({
             args: isProduction ? chromium.args : puppeteer.defaultArgs(),
             defaultViewport: chromium.defaultViewport,
