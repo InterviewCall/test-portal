@@ -18,7 +18,7 @@ async function submitService(candidateResult: CandidateResult) {
         const browser = await puppeteer.launch({
             args: isProduction ? chromium.args : puppeteer.defaultArgs(),
             defaultViewport: chromium.defaultViewport,
-            executablePath: isProduction ? await chromium.executablePath('https://interviewcall-entrancetest-bucket.s3.ap-south-1.amazonaws.com/uploads/chromium-v133.0.0-pack.tar') : process.env.EXECUTABLE_PATH || undefined,
+            executablePath: isProduction ? await chromium.executablePath(process.env.PROD_EXECUTABLE_PATH) : process.env.EXECUTABLE_PATH || undefined,
             headless: chromium.headless,
         });
     
