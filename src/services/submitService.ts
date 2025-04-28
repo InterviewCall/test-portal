@@ -14,9 +14,9 @@ async function submitService(candidateResult: CandidateResult) {
 
         const isProduction = process.env.VERCEL_ENV === 'production';
 
-        const isLocal = !!process.env.EXECUTABLE_PATH;
+        // const isLocal = !!process.env.EXECUTABLE_PATH;
         const browser = await puppeteer.launch({
-            args: isLocal ? puppeteer.defaultArgs() : chromium.args,
+            args: isProduction ? chromium.args : puppeteer.defaultArgs(),
             defaultViewport: chromium.defaultViewport,
             executablePath: isProduction ? await chromium.executablePath() : process.env.EXECUTABLE_PATH || undefined,
             headless: chromium.headless,
