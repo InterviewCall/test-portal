@@ -102,7 +102,7 @@ const Login: FC = () => {
   return (
     <div className='w-screen h-screen bg-white flex md:flex-row flex-col font-poppins'>
       {isLoading && <Loader />}
-      <div className='md:w-[40%] w-full flex flex-col text-black md:gap-y-10 md:justify-center md:px-20 px-6 py-5'>
+      <div className='md:w-[40%] max-md:h-[35%] w-full flex flex-col text-black md:gap-y-10 md:justify-center md:px-20 px-3 pt-3 max-md:mb-7'>
         <p className='md:text-xl text-base font-bold'>InterviewCall</p>
 
         <div className='flex flex-col gap-y-10'>
@@ -112,12 +112,12 @@ const Login: FC = () => {
           <div className='flex gap-x-8'>
             <div className='flex flex-col'>
               <p className='text-[#8a8c93]'>Test Duration</p>
-              <p className='text-black text-xl'>22 mins</p>
+              <p className='text-black md:text-xl text-lg'>22 mins</p>
             </div>
 
             <div className='flex flex-col'>
               <p className='text-[#8a8c93]'>No. of questions</p>
-              <p className='text-black text-xl'>22 questions</p>
+              <p className='text-black md:text-xl text-lg'>22 questions</p>
             </div>
           </div>
         </div>
@@ -130,7 +130,7 @@ const Login: FC = () => {
           <p className='underline decoration-dashed'>FAQ</p>
         </div> */}
       </div>
-      <div className='md:w-[60%] w-full bg-[#f3f6f7] text-[#3d434b] flex flex-col md:py-12 py-6 md:px-14 px-5 gap-y-10 overflow-y-scroll'>
+      <div className='md:w-[60%] max-md:h-[65%] w-full bg-[#f3f6f7] text-[#3d434b] flex flex-col md:py-12 py-6 md:px-14 px-2 md:gap-y-10 gap-y-7 overflow-y-scroll'>
         <p className='md:text-5xl text-3xl'>Sections</p>
         <p>There are 11 sections that are part of this test.</p>
         <QuestionSection />
