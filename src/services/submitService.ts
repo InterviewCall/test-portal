@@ -12,11 +12,13 @@ async function submitService(candidateResult: CandidateResult) {
     try {
         const { candidateEmail, percentage } = candidateResult;
 
+        const isProduction = process.env.VERCEL_ENV === 'production';
+
         const isLocal = !!process.env.EXECUTABLE_PATH;
         const browser = await puppeteer.launch({
             args: isLocal ? puppeteer.defaultArgs() : chromium.args,
             defaultViewport: chromium.defaultViewport,
-            executablePath: process.env.EXECUTABLE_PATH || await chromium.executablePath(),
+            executablePath: isProduction ? await chromium.executablePath() : process.env.EXECUTABLE_PATH || undefined,
             headless: chromium.headless,
         });
     
