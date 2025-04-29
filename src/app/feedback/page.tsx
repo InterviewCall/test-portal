@@ -101,12 +101,12 @@ export default function ThankYouPage() {
             Submit Feedback
             </button>
 
-            <button
+            {/* <button
             onClick={() => window.open(candidateDetails.reportCard!, '_blank')}
             className='w-full bg-green-500 hover:bg-green-600 transition-all text-white font-medium py-3 rounded-xl shadow-md cursor-pointer'
             >
             Show Report Card
-            </button>
+            </button> */}
         </div>
       </div>
     </div>
