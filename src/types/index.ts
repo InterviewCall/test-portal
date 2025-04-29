@@ -121,7 +121,7 @@ export interface CandidateResponse {
 }
   
 
-export type AnswerMap = Record<number, string>
+export type AnswerMap = Record<number | string, string>
 
 export interface CandidateResult {
     candidateName: string

@@ -1,25 +1,29 @@
 'use client';
 
 import Link from 'next/link';
-import { FC, useState } from 'react';
+import { FC, useContext } from 'react';
 
 import TestNavBar from '@/components/TestNavBar';
+import { AnswerContext } from '@/contexts/AnswerContext';
 
 const Survey: FC = () => {
-  const [selectedOptionOne, setSelectedOptionOne] = useState<string[]>([]);
-  const [selectedOptionTwo, setSelectedOptionTwo] = useState<string[]>([]);
+  const { answers, setAnswer } = useContext(AnswerContext);
   const options = ['Yes', 'No'];
-  const onCheckboxChangeOne = (opt: string) => {
-    setSelectedOptionOne((prev) =>
-      prev.includes(opt) ? prev.filter((o) => o !== opt) : [...prev, opt]
-    );
-  };
+  const survey1 = 'servey1';
+  const survey2 = 'servey2';
+  const selectedOption1 = answers[survey1] ?? null;
+  const selectedOption2 = answers[survey2] ?? null;
+//   const onCheckboxChangeOne = (opt: string) => {
+//     setSelectedOptionOne((prev) =>
+//       prev.includes(opt) ? prev.filter((o) => o !== opt) : [...prev, opt]
+//     );
+//   };
 
-  const onCheckboxChangeTwo = (opt: string) => {
-    setSelectedOptionTwo((prev) =>
-      prev.includes(opt) ? prev.filter((o) => o !== opt) : [...prev, opt]
-    );
-  };
+//   const onCheckboxChangeTwo = (opt: string) => {
+//     setSelectedOptionTwo((prev) =>
+//       prev.includes(opt) ? prev.filter((o) => o !== opt) : [...prev, opt]
+//     );
+//   };
   return (
     <div className='w-screen h-screen bg-[#f3f6f7] overflow-y-scroll overflow-x-hidden'>
       <TestNavBar />
@@ -53,7 +57,7 @@ const Survey: FC = () => {
               <label
                 key={opt}
                 className={`flex items-center bg-white border rounded-md px-4 py-2 cursor-pointer transition-colors duration-200 ${
-                  selectedOptionOne.includes(opt)
+                    selectedOption1 === opt
                     ? 'border-blue-500 bg-blue-50'
                     : 'border-gray-300'
                 }`}
@@ -62,8 +66,8 @@ const Survey: FC = () => {
                   type='checkbox'
                   name='answer'
                   value={opt}
-                  checked={selectedOptionOne.includes(opt)}
-                  onChange={() => onCheckboxChangeOne(opt)}
+                  checked={selectedOption1 === opt}
+                  onChange={() => setAnswer(survey1, opt)}
                   className='radio mr-4 checked:bg-blue-600 checked:text-blue-400 bg-white'
                 />
                 <span className='text-gray-700'>{opt}</span>
@@ -101,7 +105,7 @@ const Survey: FC = () => {
               <label
                 key={opt}
                 className={`flex items-center bg-white border rounded-md px-4 py-2 cursor-pointer transition-colors duration-200 ${
-                    selectedOptionTwo.includes(opt)
+                    selectedOption2 === opt
                     ? 'border-blue-500 bg-blue-50'
                     : 'border-gray-300'
                 }`}
@@ -110,8 +114,8 @@ const Survey: FC = () => {
                   type='checkbox'
                   name='answer'
                   value={opt}
-                  checked={selectedOptionTwo.includes(opt)}
-                  onChange={() => onCheckboxChangeTwo(opt)}
+                  checked={selectedOption2 === opt}
+                  onChange={() => setAnswer(survey2, opt)}
                   className='radio mr-4 checked:bg-blue-600 checked:text-blue-400 bg-white'
                 />
                 <span className='text-gray-700'>{opt}</span>

@@ -8,8 +8,8 @@ interface ContextData {
     answers: AnswerMap
     scoreSection: ScoreState
     setScore: (data: FinalScoreReport) => void
-    setAnswer: (questionNumber: number, option: string) => void;
-    clearOption: (questionNumber: number) => void
+    setAnswer: (questionNumber: number | string, option: string) => void;
+    clearOption: (questionNumber: number | string) => void
 }
 
 interface ContextProps {
@@ -42,7 +42,7 @@ const AnswerContextProvider: FC<ContextProps> = ({ children }) => {
         sessionStorage.setItem('userAnswer', JSON.stringify(answers));
     }, [answers]);
 
-    function setAnswer(questionNumber: number, option: string) {
+    function setAnswer(questionNumber: number | string, option: string) {
         setAnswers((prev) => ({
             ...prev,
             [questionNumber]: option
@@ -59,7 +59,7 @@ const AnswerContextProvider: FC<ContextProps> = ({ children }) => {
         }));
     }
 
-    function clearOption(questionNumber: number) {
+    function clearOption(questionNumber: number | string) {
         setAnswers((prev) => {
             const updated = { ...prev };
             delete updated[questionNumber];

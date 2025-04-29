@@ -78,8 +78,13 @@ const QuestionsPage: FC = () => {
 
             <div className='w-full md:col-span-2'>
               <Link href='/questions/survey'>
-                <button className='btn btn-md btn-success w-full px-5 py-2 text-white rounded-md'>
-                  Solve
+              <button className={clsx(
+                            'btn btn-md w-full px-5 py-2 rounded-md',
+                            answers['survey1']
+                              ? 'bg-white text-[#00d390] border border-[#00d390]'
+                              : 'btn-success text-white'
+                          )}>
+                  {answers['survey1'] ? 'Modify' : 'Solve'}
                 </button>
               </Link>
             </div>
@@ -94,8 +99,13 @@ const QuestionsPage: FC = () => {
 
             <div className='w-full md:col-span-2'>
               <Link href='/questions/survey'>
-                <button className='btn btn-md btn-success w-full px-28 py-2 text-white rounded-md'>
-                  Solve
+                <button className={clsx(
+                            'btn btn-md w-full px-5 py-2 rounded-md',
+                            answers['survey2']
+                              ? 'bg-white text-[#00d390] border border-[#00d390]'
+                              : 'btn-success text-white'
+                          )}>
+                  {answers['survey2'] ? 'Modify' : 'Solve'}
                 </button>
               </Link>
             </div>

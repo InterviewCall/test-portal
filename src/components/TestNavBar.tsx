@@ -162,7 +162,7 @@ const TestNavBar: FC = () => {
       {/* Right Section: Status, Timer, Icons, Profile */}
       <div className='flex items-center gap-6 text-base'>
         <div className='font-medium text-xs'>
-          <span className='hidden md:inline text-lg'>Answered:</span> <span className='md:hidden text-sm'>Ans:</span> <span className='font-bold text-sm md:text-lg'>{`${answerLength} / 20`}</span>
+          <span className='hidden md:inline text-lg'>Answered:</span> <span className='md:hidden text-sm'>Ans:</span> <span className='font-bold text-sm md:text-lg'>{`${answerLength} / 22`}</span>
         </div>
 
         <div className='flex items-center gap-1'>

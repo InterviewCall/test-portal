@@ -94,6 +94,7 @@ const Login: FC = () => {
         router.replace('/feedback');
       }
     } catch (error) {
+      console.log(error);
       const err = error as AxiosError<ErrorResponse>;
       const msg = err.response?.data.message || 'Something went wrong';
       toast.error(msg);
