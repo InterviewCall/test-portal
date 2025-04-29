@@ -1,6 +1,6 @@
 'use client';
 
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FC, useContext, useState } from 'react';
@@ -11,7 +11,7 @@ import QuestionSection from '@/components/QuestionSection';
 import { CANDIDATE_API } from '@/constants';
 import { CandidateContext } from '@/contexts/CandidateContext';
 import { TEST_STATUS } from '@/enums/TestStatus';
-import { CandidateResponse } from '@/types';
+import { CandidateResponse, ErrorResponse } from '@/types';
 
 const Select = dynamic(() => import('react-select'), { ssr: false });
 
@@ -94,7 +94,9 @@ const Login: FC = () => {
         router.replace('/feedback');
       }
     } catch (error) {
-      console.log(error);
+      const err = error as AxiosError<ErrorResponse>;
+      const msg = err.response?.data.message || 'Something went wrong';
+      toast.error(msg);
     } finally {
       setIsLoading(false);
     }
@@ -112,12 +114,12 @@ const Login: FC = () => {
           <div className='flex gap-x-8'>
             <div className='flex flex-col'>
               <p className='text-[#8a8c93]'>Test Duration</p>
-              <p className='text-black md:text-xl text-lg'>22 mins</p>
+              <p className='text-black md:text-xl text-sm'>22 mins</p>
             </div>
 
             <div className='flex flex-col'>
               <p className='text-[#8a8c93]'>No. of questions</p>
-              <p className='text-black md:text-xl text-lg'>22 questions</p>
+              <p className='text-black md:text-xl text-sm'>22 questions</p>
             </div>
           </div>
         </div>
