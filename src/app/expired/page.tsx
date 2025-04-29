@@ -19,7 +19,7 @@ const Expired: FC = () => {
         return;
     }
 
-    if((new Date(candidateDetails.dateOfTest) > new Date()) || (new Date(candidateDetails.startTime) > new Date())) {
+    if((new Date(candidateDetails.startTime) > new Date()) || (new Date(candidateDetails.startTime) > new Date())) {
         router.replace('/not-started');
         return;
     }
