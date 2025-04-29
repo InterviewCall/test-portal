@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { FC, useContext, useEffect } from 'react';
 
 import { CandidateContext } from '@/contexts/CandidateContext';
-import { formatOnlyDate, formatTime } from '@/utils';
+import { formatDate } from '@/utils';
 
 const TestNotStarted: FC = () => {
   const router = useRouter();
@@ -21,7 +21,7 @@ const TestNotStarted: FC = () => {
         return;
     }
 
-    if((new Date(candidateDetails.dateOfTest) <= new Date()) && (new Date(candidateDetails.startTime) <= new Date())) {
+    if((new Date(candidateDetails.startTime) <= new Date())) {
         router.back();
         return;
     }
@@ -35,7 +35,7 @@ const TestNotStarted: FC = () => {
 
   if (!candidateDetails) return null;
 
-  const formattedStartTime = `${formatOnlyDate(candidateDetails.dateOfTest)}, ${formatTime(candidateDetails.startTime)}`;
+  const formattedStartTime = `${formatDate(candidateDetails.startTime)}`;
   return (
     <div className='min-h-screen flex flex-col items-center justify-center bg-base-100 text-center px-4'>
       <h1 className='text-2xl md:text-3xl font-semibold mb-4 text-error'>

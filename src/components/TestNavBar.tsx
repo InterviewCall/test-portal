@@ -66,7 +66,7 @@ const TestNavBar: FC = () => {
 
     const now = new Date();
 
-    if((new Date(candidateDetails.dateOfTest) > now) || (new Date(candidateDetails.startTime) > now)) {
+    if((new Date(candidateDetails.startTime) > now) || (new Date(candidateDetails.startTime) > now)) {
       router.replace('/not-started');
       return;
     }

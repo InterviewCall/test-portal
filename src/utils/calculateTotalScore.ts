@@ -9,7 +9,7 @@ import { formatDate, formatDuration, formatOnlyDate } from '.';
 async function calculateTotalScore(candidateDetails: Candidate, answers: AnswerMap) {
     const candidateName = candidateDetails?.candidateName;
     const candidateEmail = candidateDetails?.candidateEmail;
-    const invitedOn = formatOnlyDate(candidateDetails?.dateOfTest as Date);
+    const invitedOn = formatOnlyDate(candidateDetails?.startTime as Date);
     const takenOn = formatDate(new Date(sessionStorage.getItem('testStartTime')!));
     const startTime = new Date(sessionStorage.getItem('testStartTime')!);
     const endTime = new Date();

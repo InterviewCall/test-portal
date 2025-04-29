@@ -106,7 +106,6 @@ export interface FinalScoreReportResponse {
 export interface Candidate {
     candidateName: string
     candidateEmail: string
-    dateOfTest: Date
     startTime: Date
     endTime: Date
     invitedBy: string

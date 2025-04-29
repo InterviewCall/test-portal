@@ -82,7 +82,7 @@ const Login: FC = () => {
 
       toast.success('Welcome Superstar!');
 
-      if((new Date(candidateInfo.dateOfTest) > new Date()) || (new Date(candidateInfo.startTime) > new Date())) {
+      if((new Date(candidateInfo.startTime) > new Date()) || (new Date(candidateInfo.startTime) > new Date())) {
         router.replace('/not-started');
         return;
       }
