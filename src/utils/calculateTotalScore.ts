@@ -4,12 +4,12 @@ import { CANDIDATE_API, PROBLEM_API } from '@/constants';
 import { TEST_STATUS } from '@/enums/TestStatus';
 import { AnswerMap, Candidate, CandidateResponse, FinalScoreReportResponse } from '@/types';
 
-import { formatDate, formatDuration, formatOnlyDate } from '.';
+import { formatDate, formatDuration } from '.';
 
 async function calculateTotalScore(candidateDetails: Candidate, answers: AnswerMap) {
     const candidateName = candidateDetails?.candidateName;
     const candidateEmail = candidateDetails?.candidateEmail;
-    const invitedOn = formatOnlyDate(candidateDetails?.startTime as Date);
+    const invitedOn = formatDate(candidateDetails?.startTime as Date);
     const takenOn = formatDate(new Date(sessionStorage.getItem('testStartTime')!));
     const startTime = new Date(sessionStorage.getItem('testStartTime')!);
     const endTime = new Date();
