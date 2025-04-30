@@ -78,7 +78,6 @@ const Login: FC = () => {
       });
       const candidateInfo = response.data.data;
       setCandidate(candidateInfo);
-      console.log(candidateInfo);
 
       toast.success('Welcome Superstar!');
 
