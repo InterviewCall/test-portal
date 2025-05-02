@@ -1,17 +1,17 @@
 'use client';
 
-import { AxiosError } from 'axios';
+// import { AxiosError } from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FC, useContext, useEffect } from 'react';
-import toast from 'react-hot-toast';
 
+// import toast from 'react-hot-toast';
 import { AnswerContext } from '@/contexts/AnswerContext';
 import { CandidateContext } from '@/contexts/CandidateContext';
 import { TEST_STATUS } from '@/enums/TestStatus';
-import { CodeStub, ErrorResponse } from '@/types';
-import calculateTotalScore from '@/utils/calculateTotalScore';
+import { CodeStub } from '@/types';
 
+// import calculateTotalScore from '@/utils/calculateTotalScore';
 import CodeQuestionLayout from './CodeQuestionLayout';
 import SubmitLoader from './SubmitLoader';
 
@@ -26,27 +26,27 @@ interface QuestionProps {
 
 const QuestionPage: FC<QuestionProps> = ({ questionNumber, questionTitle, questionStatement, options, codeStubs, marks }) => {
   const { answers, setAnswer, clearOption } = useContext(AnswerContext);
-  const { candidateDetails, setCandidate, setLoader } = useContext(CandidateContext);
+  const { candidateDetails } = useContext(CandidateContext);
   const router = useRouter();
   const selectedOption = answers[questionNumber] ?? null;
 
-  async function calculateScore() {
-    try {
-      setLoader('loading');
-      const candidate = await calculateTotalScore(candidateDetails, answers);
-      setLoader('success');
-      setTimeout(() => {
-        setLoader('hidden');
-        toast.success('Successfully submitted your test');
-        setCandidate(candidate);
-      }, 1500);
-    } catch (error) {
-      const axiosError = error as AxiosError<ErrorResponse>;
-      const message = axiosError?.response?.data?.message || axiosError?.message || 'Something went wrong';
-      toast.error(message);
-      router.replace('/');
-    }
-  }
+  // async function calculateScore() {
+  //   try {
+  //     setLoader('loading');
+  //     const candidate = await calculateTotalScore(candidateDetails, answers);
+  //     setLoader('success');
+  //     setTimeout(() => {
+  //       setLoader('hidden');
+  //       toast.success('Successfully submitted your test');
+  //       setCandidate(candidate);
+  //     }, 1500);
+  //   } catch (error) {
+  //     const axiosError = error as AxiosError<ErrorResponse>;
+  //     const message = axiosError?.response?.data?.message || axiosError?.message || 'Something went wrong';
+  //     toast.error(message);
+  //     router.replace('/');
+  //   }
+  // }
 
   useEffect(() => {
     if(candidateDetails?.testStatus == TEST_STATUS.SUBMITTED) {
@@ -112,7 +112,7 @@ const QuestionPage: FC<QuestionProps> = ({ questionNumber, questionTitle, questi
           </Link>
         </div>
 
-        {questionNumber == 20 && <button onClick={calculateScore} className='btn btn-block btn-lg btn-success text-white mt-4'>Submit</button>}
+        {/* {questionNumber == 20 && <button onClick={calculateScore} className='btn btn-block btn-lg btn-success text-white mt-4'>Submit</button>} */}
       </div>
     </div>
   );

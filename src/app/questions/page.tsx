@@ -16,10 +16,11 @@ import { CandidateContext } from '@/contexts/CandidateContext';
 import { TEST_STATUS } from '@/enums/TestStatus';
 import useQuestions from '@/hooks/useQuestions';
 import { ErrorResponse } from '@/types';
+import calculateTotalScore from '@/utils/calculateTotalScore';
 
 const QuestionsPage: FC = () => {
   const { answers } = useContext(AnswerContext);
-  const { candidateDetails, setCandidateStatus } = useContext(CandidateContext); 
+  const { candidateDetails, setCandidateStatus, setLoader, setCandidate } = useContext(CandidateContext); 
   const { questions, isLoading, isError, error } = useQuestions();
   const router = useRouter();
 
@@ -34,6 +35,24 @@ const QuestionsPage: FC = () => {
       const axiosError = error as AxiosError<ErrorResponse>;
       const message = axiosError?.response?.data?.message || axiosError?.message || 'Something went wrong';
       toast.error(message);
+    }
+  }
+
+  async function calculateScore() {
+    try {
+      setLoader('loading');
+      const candidate = await calculateTotalScore(candidateDetails, answers);
+      setLoader('success');
+      setTimeout(() => {
+        setLoader('hidden');
+        toast.success('Successfully submitted your test');
+        setCandidate(candidate);
+      }, 1500);
+    } catch (error) {
+      const axiosError = error as AxiosError<ErrorResponse>;
+      const message = axiosError?.response?.data?.message || axiosError?.message || 'Something went wrong';
+      toast.error(message);
+      router.replace('/');
     }
   }
 
@@ -162,6 +181,10 @@ const QuestionsPage: FC = () => {
                 ))}
             </div>
           ))}
+      </div>
+
+      <div className='w-full flex justify-center items-center fixed bottom-0'>
+        <button className='btn btn-secondary text-white md:w-[30%] max-md:w-full text-lg' onClick={calculateScore}>Submit</button>
       </div>
     </div>
   );
