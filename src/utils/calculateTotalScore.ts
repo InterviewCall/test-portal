@@ -27,6 +27,7 @@ async function calculateTotalScore(candidateDetails: Candidate, answers: AnswerM
       // calculate score
       const response: AxiosResponse<FinalScoreReportResponse> = await axios.post(`${PROBLEM_API}/calculate-score`, {
         userAnswers: answers,
+        problemLevel: candidateDetails.problemLevel
       });
 
       const candidateResult = response.data.data;
