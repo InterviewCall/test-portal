@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 
 import Loader from '@/components/Loader';
 import QuestionSection from '@/components/QuestionSection';
-import { CANDIDATE_API } from '@/constants';
+import { advancedQuestionsSections, CANDIDATE_API, intermediateQuestionsSections } from '@/constants';
 import { CandidateContext } from '@/contexts/CandidateContext';
 import { TEST_STATUS } from '@/enums/TestStatus';
 import { CandidateResponse, ErrorResponse } from '@/types';
@@ -115,11 +115,19 @@ const Login: FC = () => {
             <div className='flex flex-col'>
               <p className='text-[#8a8c93]'>Test Duration</p>
               <p className='text-black md:text-xl text-sm'>22 mins</p>
+              <p className='text-black md:text-xl text-sm'>20 mins</p>
             </div>
 
             <div className='flex flex-col'>
               <p className='text-[#8a8c93]'>No. of questions</p>
               <p className='text-black md:text-xl text-sm'>22 questions</p>
+              <p className='text-black md:text-xl text-sm'>12 questions</p>
+            </div>
+
+            <div className='flex flex-col'>
+              <p className='text-[#8a8c93]'>Level</p>
+              <p className='text-black md:text-xl text-sm'>Intermediate</p>
+              <p className='text-black md:text-xl text-sm'>Advanced</p>
             </div>
           </div>
         </div>
@@ -134,8 +142,10 @@ const Login: FC = () => {
       </div>
       <div className='md:w-[60%] max-md:h-[65%] w-full bg-[#f3f6f7] text-[#3d434b] flex flex-col md:py-12 py-6 md:px-14 px-2 md:gap-y-10 gap-y-7 overflow-y-scroll'>
         <p className='md:text-5xl text-3xl'>Sections</p>
-        <p>There are 11 sections that are part of this test.</p>
-        <QuestionSection />
+        <p>There are 11 sections that are part of Intermediate Level test.</p>
+        <QuestionSection questionSection={intermediateQuestionsSections} />
+        <p>There are 7 sections that are part of Advanced Level test.</p>
+        <QuestionSection questionSection={advancedQuestionsSections} />
         <p className='md:text-5xl text-3xl'>Confirmation Form</p>
         <p>Before we start, here is some extra information we need to asses you better.</p>
 

@@ -103,6 +103,12 @@ export interface FinalScoreReportResponse {
     data: FinalScoreReport
 }
 
+export type QuestionSectionType = {
+    number: number,
+    section: string,
+    questions: number
+}
+
 export interface Candidate {
     candidateName: string
     candidateEmail: string

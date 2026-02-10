@@ -1,6 +1,6 @@
 import { CodeStub } from '@/types';
 
-export const questionsSections = [
+export const intermediateQuestionsSections = [
     { number: 1, section: 'Survey', questions: 2 },
     { number: 2, section: 'Time Complexity & Algorithm Analysis', questions: 2 },
     { number: 3, section: 'Recursion & Dynamic Programming', questions: 3 },
@@ -12,6 +12,20 @@ export const questionsSections = [
     { number: 9, section: 'String Manipulation', questions: 2 },
     { number: 10, section: 'Data Structures', questions: 1 },
     { number: 11, section: 'Tricky Programming Questions', questions: 2 },
+];
+
+export const advancedQuestionsSections = [
+    { number: 1, section: 'Survey', questions: 2 },
+    { number: 2, section: 'Advanced Tree Algorithms', questions: 3 },
+    { number: 3, section: 'Advanced Graph Algorithm', questions: 3 },
+    { number: 4, section: 'Advanced DP', questions: 2 },
+    { number: 5, section: 'Advanced String Manipulation', questions: 2 },
+    { number: 6, section: 'Advanced Bit Manipulation', questions: 1 },
+    { number: 7, section: 'Mo\'s Algorithm', questions: 1 },
+    // { number: 8, section: 'Number Theory', questions: 1 },
+    // { number: 9, section: 'String Manipulation', questions: 2 },
+    // { number: 10, section: 'Data Structures', questions: 1 },
+    // { number: 11, section: 'Tricky Programming Questions', questions: 2 },
 ];
 
 type Question = {

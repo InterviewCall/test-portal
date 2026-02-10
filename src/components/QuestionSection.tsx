@@ -1,8 +1,13 @@
 import { FC } from 'react';
 
-import { questionsSections } from '@/constants';
+// import { questionsSections } from '@/constants';
+import { QuestionSectionType } from '@/types';
 
-const QuestionSection: FC = () => {
+interface QuestionSectionProps {
+  questionSection: QuestionSectionType[]
+}
+
+const QuestionSection: FC<QuestionSectionProps> = ({ questionSection }) => {
     return (
     <div className=''>
       <div className='shadow-xl rounded-xl md:w-[70%] w-full'>
@@ -15,7 +20,7 @@ const QuestionSection: FC = () => {
             </tr>
           </thead>
           <tbody className='bg-[#f3f6f7] text-[#3d434b]'>
-            {questionsSections.map(({ number, section, questions }) => (
+            {questionSection.map(({ number, section, questions }) => (
               <tr key={number} className='hover'>
                 <td>{number}</td>
                 <td>{section}</td>
