@@ -17,7 +17,11 @@ import calculateTotalScore from '@/utils/calculateTotalScore';
 
 import Logo from '../../public/images/logo.png';
 
-const TestNavBar: FC = () => {
+interface NavBarProps {
+  problemLevel?: string
+}
+
+const TestNavBar: FC<NavBarProps> = ({ problemLevel }) => {
   const [diff, setDiff] = useState(0);
   const intervalId = useRef<NodeJS.Timeout | null>(null);
   const { answers } = useContext(AnswerContext);
@@ -162,7 +166,7 @@ const TestNavBar: FC = () => {
       {/* Right Section: Status, Timer, Icons, Profile */}
       <div className='flex items-center gap-6 text-base'>
         <div className='font-medium text-xs'>
-          <span className='hidden md:inline text-lg'>Answered:</span> <span className='md:hidden text-sm'>Ans:</span> <span className='font-bold text-sm md:text-lg'>{`${answerLength} / 22`}</span>
+          <span className='hidden md:inline text-lg'>Answered:</span> <span className='md:hidden text-sm'>Ans:</span> <span className='font-bold text-sm md:text-lg'>{`${answerLength} / ${problemLevel ? problemLevel == 'Intermediate' ? '22' : '12' : '22'}`}</span>
         </div>
 
         <div className='flex items-center gap-1'>

@@ -26,7 +26,7 @@ const Survey: FC = () => {
 //   };
   return (
     <div className='w-screen h-screen bg-[#f3f6f7] overflow-y-scroll overflow-x-hidden'>
-      <TestNavBar />
+      <TestNavBar  />
 
       <div className='pt-16 text-[#3d434b] font-poppins'>
         <p className='p-8'>
