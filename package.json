@@ -19,7 +19,7 @@
     "katex": "^0.16.28",
     "lucide-react": "^0.488.0",
     "mongoose": "^8.13.2",
-    "next": "15.2.5",
+    "next": "^15.5.12",
     "prism-react-renderer": "^2.4.1",
     "puppeteer-core": "^24.6.1",
     "react": "^19.0.0",
