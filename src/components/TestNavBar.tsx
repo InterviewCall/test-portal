@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 import { FaUserCircle } from 'react-icons/fa';
 import { IoTimerOutline } from 'react-icons/io5';
 
-import { MAX_DURATION_MS } from '@/constants';
+import { MAX_DURATION_MS_ADVANCED, MAX_DURATION_MS_INTERMEDIATE } from '@/constants';
 import { AnswerContext } from '@/contexts/AnswerContext';
 import { CandidateContext } from '@/contexts/CandidateContext';
 import { TEST_STATUS } from '@/enums/TestStatus';
@@ -95,7 +95,7 @@ const TestNavBar: FC = () => {
       return;
     }
 
-    const target = new Date(startTime.getTime() + Math.min(MAX_DURATION_MS, remainingMs));
+    const target = new Date(startTime.getTime() + Math.min(candidateDetails.problemLevel == 'Intermediate' ? MAX_DURATION_MS_INTERMEDIATE : MAX_DURATION_MS_ADVANCED, remainingMs));
     const initialDiff = target.getTime() - now.getTime();
     setDiff(initialDiff);
 

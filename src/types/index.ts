@@ -110,6 +110,7 @@ export interface Candidate {
     endTime: Date
     invitedBy: string
     testStatus: TEST_STATUS
+    problemLevel: string
     // reportCard: string | null
     // percentage: number | null
     ratings: number | null

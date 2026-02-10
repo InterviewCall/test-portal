@@ -21,7 +21,7 @@ import calculateTotalScore from '@/utils/calculateTotalScore';
 const QuestionsPage: FC = () => {
   const { answers } = useContext(AnswerContext);
   const { candidateDetails, setCandidateStatus, setLoader, setCandidate } = useContext(CandidateContext); 
-  const { questions, isLoading, isError, error } = useQuestions();
+  const { questions, isLoading, isError, error } = useQuestions(candidateDetails?.problemLevel || null);
   const router = useRouter();
 
   async function updateTestStatus() {
