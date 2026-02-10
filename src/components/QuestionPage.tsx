@@ -13,6 +13,7 @@ import { CodeStub } from '@/types';
 
 // import calculateTotalScore from '@/utils/calculateTotalScore';
 import CodeQuestionLayout from './CodeQuestionLayout';
+import MarkdownViewer from './MarkdownViewer';
 import SubmitLoader from './SubmitLoader';
 
 interface QuestionProps {
@@ -65,8 +66,10 @@ const QuestionPage: FC<QuestionProps> = ({ questionNumber, questionTitle, questi
         </h1>
 
         {/* Question Text */}
-        <p className='text-gray-700 mb-6 select-none'>{questionStatement}</p>
-
+        {/* <div className='text-gray-700 mb-6 select-none'>{questionStatement }</div> */}
+        <div className='text-gray-700 mb-6 select-none'>
+          < MarkdownViewer content={questionStatement.trim()} />
+        </div>
         {/* Instruction */}
         <p className='font-semibold text-sm mb-3'>
           Pick <span className='font-bold'>ONE</span> option

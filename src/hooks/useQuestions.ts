@@ -10,12 +10,12 @@ function useQuestions(problemLevel: string | null) {
         queryFn: fetchQuestions,
         staleTime: 1000 * 60 * 60 * 24,
         refetchOnWindowFocus: false,
-        enabled: !!problemLevel
+        // enabled: !!problemLevel
     });
 
     async function fetchQuestions() {
         const response: AxiosResponse<ProblemResponse> = await axios.get(`${PROBLEM_API}/get-all-problems`,{
-            params: { problemLevel }
+            params: { problemLevel : problemLevel ?? 'Intermediate' }
         });
         return response.data;
     }

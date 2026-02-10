@@ -52,6 +52,12 @@
   }
 }
 
+.markdown h1, .markdown h2 {
+  all: revert; /* or define explicit styles */
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
 /* body {
   background: var(--background);
   color: var(--foreground);
