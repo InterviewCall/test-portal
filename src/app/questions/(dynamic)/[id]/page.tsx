@@ -27,7 +27,7 @@ const Question: FC = () => {
 
   return (
     <div className='w-screen h-screen bg-[#f3f6f7] overflow-y-scroll overflow-x-hidden'>
-      <TestNavBar problemLevel={candidateDetails.problemLevel} />
+      <TestNavBar />
       {isLoading && <Loader />}
 
       <div className='pt-16 text-[#3d434b] font-poppins'>

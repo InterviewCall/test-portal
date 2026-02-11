@@ -75,7 +75,7 @@ const QuestionsPage: FC = () => {
 
   return (
     <div className='w-screen h-screen bg-[#f3f6f7] overflow-x-hidden'>
-      <TestNavBar problemLevel={candidateDetails.problemLevel} />
+      <TestNavBar />
       <SubmitLoader />
       {isLoading && <Loader />}
       <div className='pt-24 px-9 text-[#3d434b] font-poppins'>
