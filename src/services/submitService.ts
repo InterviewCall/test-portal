@@ -6,12 +6,12 @@ import puppeteer from 'puppeteer-core';
 import { s3 } from '@/configs/awsConfig';
 import { CANDIDATE_API } from '@/constants';
 import { CandidateResponse, CandidateResult } from '@/types';
-import { pdfContent } from '@/utils';
+import { advancedTestPdfContent, intermediateTestPdfContent } from '@/utils';
 
 // const isLocal = !!process.env.EXECUTABLE_PATH;
 async function submitService(candidateResult: CandidateResult) {
     try {
-        const { candidateEmail, percentage } = candidateResult;
+        const { candidateEmail, problemLevel, percentage } = candidateResult;
 
         const isProduction = process.env.VERCEL_ENV === 'production';
 
@@ -24,7 +24,7 @@ async function submitService(candidateResult: CandidateResult) {
     
         const page = await browser.newPage();
     
-        const pageContent = pdfContent(candidateResult);
+        const pageContent = problemLevel ? problemLevel == 'Intermediate' ? intermediateTestPdfContent(candidateResult) : advancedTestPdfContent(candidateResult) : intermediateTestPdfContent(candidateResult);
     
         await page.setContent(pageContent, {
             waitUntil: 'networkidle0'

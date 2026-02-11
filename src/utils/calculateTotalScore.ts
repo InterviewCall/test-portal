@@ -17,6 +17,7 @@ async function calculateTotalScore(candidateDetails: Candidate, answers: AnswerM
     const storedExp = sessionStorage.getItem('workExperience')!;
     const workExperience = JSON.parse(storedExp).label;
     const invitedBy = candidateDetails?.invitedBy;
+    const problemLevel = candidateDetails?.problemLevel;
     try {
       //mark-submit
       // await axios.patch(`${CANDIDATE_API}/update-test-status`, {
@@ -38,6 +39,7 @@ async function calculateTotalScore(candidateDetails: Candidate, answers: AnswerM
         candidateResult: {
           candidateName,
           candidateEmail,
+          problemLevel,
           invitedBy,
           workExperience,
           timeTaken,

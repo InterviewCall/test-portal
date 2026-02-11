@@ -132,6 +132,7 @@ export type AnswerMap = Record<number | string, string>
 export interface CandidateResult {
     candidateName: string
     candidateEmail: string
+    problemLevel: string
     invitedBy: string
     workExperience: string
     timeTaken: string
