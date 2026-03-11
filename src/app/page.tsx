@@ -115,7 +115,7 @@ const Login: FC = () => {
             <div className='flex flex-col'>
               <p className='text-[#8a8c93]'>Test Duration</p>
               <p className='text-black md:text-xl text-sm'>22 mins</p>
-              <p className='text-black md:text-xl text-sm'>20 mins</p>
+              <p className='text-black md:text-xl text-sm'>12 mins</p>
             </div>
 
             <div className='flex flex-col'>

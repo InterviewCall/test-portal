@@ -84,4 +84,4 @@ export const CANDIDATE_API = process.env.NEXT_PUBLIC_CANDIDATE_API!;
 
 export const MAX_DURATION_MS_INTERMEDIATE = 22.12 * 60 * 1000;
 
-export const MAX_DURATION_MS_ADVANCED = 20 * 60 * 1000;
+export const MAX_DURATION_MS_ADVANCED = 12.18 * 60 * 1000;
